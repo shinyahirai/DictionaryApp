@@ -7,10 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "History.h"
+#import "AppDelegate.h"
 
-@interface ViewController : UIViewController <UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface ViewController : UIViewController <UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,NSFetchedResultsControllerDelegate> {
+    // Core Data 用
+    NSMutableArray *_objectChanges;
+    NSMutableArray *_sectionChanges;
+}
+
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+// Core Data 用
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
