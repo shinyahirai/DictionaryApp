@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65267CB31841602D00FBA5C4 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65267CB21841602D00FBA5C4 /* SettingViewController.m */; };
 		654ADB4A1840040500241DDB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 654ADB481840040500241DDB /* Model.xcdatamodeld */; };
 		654ADB4D184004BB00241DDB /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 654ADB4C184004BB00241DDB /* History.m */; };
 		654ADB4F184004D100241DDB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654ADB4E184004D100241DDB /* CoreData.framework */; };
@@ -24,6 +25,7 @@
 		654F39B2183F899C00A41EF5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654F3994183F899C00A41EF5 /* UIKit.framework */; };
 		654F39BA183F899C00A41EF5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 654F39B8183F899C00A41EF5 /* InfoPlist.strings */; };
 		654F39BC183F899C00A41EF5 /* No_connection_DictionaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F39BB183F899C00A41EF5 /* No_connection_DictionaryTests.m */; };
+		65B5A1871841446C00EB3707 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B5A1861841446C00EB3707 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		65267CB11841602D00FBA5C4 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		65267CB21841602D00FBA5C4 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		654ADB491840040500241DDB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		654ADB4B184004BB00241DDB /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		654ADB4C184004BB00241DDB /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
@@ -60,6 +64,7 @@
 		654F39B7183F899C00A41EF5 /* No connection DictionaryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "No connection DictionaryTests-Info.plist"; sourceTree = "<group>"; };
 		654F39B9183F899C00A41EF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		654F39BB183F899C00A41EF5 /* No_connection_DictionaryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = No_connection_DictionaryTests.m; sourceTree = "<group>"; };
+		65B5A1861841446C00EB3707 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B5A1871841446C00EB3707 /* QuartzCore.framework in Frameworks */,
 				654ADB4F184004D100241DDB /* CoreData.framework in Frameworks */,
 				654F3993183F899C00A41EF5 /* CoreGraphics.framework in Frameworks */,
 				654F3995183F899C00A41EF5 /* UIKit.framework in Frameworks */,
@@ -109,6 +115,7 @@
 		654F398F183F899C00A41EF5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65B5A1861841446C00EB3707 /* QuartzCore.framework */,
 				654ADB4E184004D100241DDB /* CoreData.framework */,
 				654F3990183F899C00A41EF5 /* Foundation.framework */,
 				654F3992183F899C00A41EF5 /* CoreGraphics.framework */,
@@ -127,6 +134,8 @@
 				654F39A2183F899C00A41EF5 /* Main.storyboard */,
 				654F39A5183F899C00A41EF5 /* ViewController.h */,
 				654F39A6183F899C00A41EF5 /* ViewController.m */,
+				65267CB11841602D00FBA5C4 /* SettingViewController.h */,
+				65267CB21841602D00FBA5C4 /* SettingViewController.m */,
 				654F39A8183F899C00A41EF5 /* Images.xcassets */,
 				654F3997183F899C00A41EF5 /* Supporting Files */,
 			);
@@ -274,6 +283,7 @@
 				654F399D183F899C00A41EF5 /* main.m in Sources */,
 				654ADB4D184004BB00241DDB /* History.m in Sources */,
 				654ADB4A1840040500241DDB /* Model.xcdatamodeld in Sources */,
+				65267CB31841602D00FBA5C4 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

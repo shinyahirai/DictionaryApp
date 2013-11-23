@@ -23,7 +23,6 @@
     ViewController *viewController = (ViewController *)controller;
     viewController.managedObjectContext = self.managedObjectContext;
 
-    
     return YES;
 }
 							

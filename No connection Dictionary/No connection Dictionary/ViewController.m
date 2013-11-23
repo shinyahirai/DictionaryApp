@@ -3,7 +3,7 @@
 //  No connection Dictionary                                                 /     \
 //                                                                           ここ選択すると  TODOコロン ~  で記述したコメントを見ることができる
 //  Created by Shinya Hirai on 2013/11/22.　　　　　　　　　　　　　　　　　　　　　#pragma mark を記述したところでグループ分けをしてくれるので見やすくなる
-//  Copyright (c) 2013年 Shinya Hirai. All rights reserved.
+//  Copyright (c) 2013年 Shinya Hirai. All rights reserved.                  下記コメントにて説明
 //
 
 
@@ -36,14 +36,74 @@
     NSString* _nowSearchStr;
     NSMutableArray* _beforeHistoryArr;
     NSMutableArray* _afterhistoryArr;
+    
+    // ローディング画面用変数
+    UIView *_loadingViewGround;
+    UIView *_loadingView;
+    UIActivityIndicatorView *_indicatorView;
+    UILabel *_processinglabel;
 }
 
-- (NSManagedObject *)checkDupulicationInEntity:(NSString *) entityName withKey:(NSString *)keyString withValue:(NSString *)valueString{
+#pragma mark roading view
+-(void) indicatorStart {
+    // スタートメソッド
+    // 元となるViewをつくる
+    _loadingViewGround = [[UIView alloc] initWithFrame:[[self view] bounds]];
+    [self.view addSubview:_loadingViewGround];
+    
+    // 丸みを帯びた土台となるViewをつくる
+    _loadingView = [[UIView alloc] initWithFrame:CGRectMake(60,100,200,110)];
+    [_loadingView setBackgroundColor:[UIColor lightGrayColor]];
+    _loadingView.layer.cornerRadius = 10;
+    _loadingView.clipsToBounds = YES;
+    [_loadingView setAlpha:0.0];
+    [_loadingViewGround addSubview:_loadingView];
+    
+    // indicator(処理中を知らせるためのクルクル回るあれ)をつくる
+    _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [_indicatorView setFrame:CGRectMake (79, 15, 40, 40)];
+    [_indicatorView setAlpha:0.0];
+    [_loadingView addSubview:_indicatorView];
+    
+    // 処理中のコメント表示用ラベルをつくる
+    _processinglabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 26, 200,90)];
+    _processinglabel.text = @"読み込み中...";
+    _processinglabel.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:18.0f];
+    _processinglabel.textAlignment = 1;
+    _processinglabel.backgroundColor = [UIColor clearColor];
+    _processinglabel.textColor = [UIColor whiteColor];
+    [_processinglabel setAlpha:0.0];
+    [_loadingView addSubview:_processinglabel];
+    
+    [_indicatorView startAnimating];
+    
+    // 0.5秒かけてフワッとローディング画面がでるようにするアニメーション
+    [UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:0.5];
+    [_loadingView setAlpha:0.4];
+    [_indicatorView setAlpha:1.0];
+    [_processinglabel setAlpha:1.0];
+	[UIView commitAnimations];
+}
+
+-(void) indicatorStop {
+    // ストップメソッド
+    [_indicatorView stopAnimating];
+    [_loadingViewGround removeFromSuperview];
+    [_loadingView removeFromSuperview];
+}
+
+#pragma mark -
+
+- (NSManagedObject *)checkDupulicationInEntity:(NSString *) entityName withKey:(NSString *)keyString withValue:(NSString *)valueString {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:entityName];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %@", keyString, valueString];
     [fetchRequest setPredicate:predicate];
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSArray *results = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    NSLog(@"predicate keyString = %@", keyString);
+    NSLog(@"predicate vavlueString = %@",valueString);
+
+    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    NSLog(@"results = %@", results);
     
     if (results.count > 0) {
         return [results objectAtIndex:0];
@@ -54,7 +114,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     /*
      Core Dataに保存する処理
      */
@@ -63,31 +122,67 @@
     // _nowSearchStrがnil,nullではなく、文字の長さが0ではなければ、要するに空でなければCore Dataに保存し、tableviewに履歴として表示
     if (![_nowSearchStr isEqual:[NSNull null]] && [_nowSearchStr length] > 0) {
         
-        // エンティティはHistoryという名前のNSManagedObjectのサブクラス。
-        NSManagedObjectContext *context = [appDelegate managedObjectContext];
-        NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:context];
-        
-        // 検索した日時のデータと検索したワードをCore Dataに保存
-        [newManagedObject setValue:[NSDate date] forKey:@"added"];
-        [newManagedObject setValue:_nowSearchStr forKey:@"history"];
-        
-        // Save the context.
-        NSError *error = nil;
-        if (![context save:&error]) {
-            // もしエラーなら内容を表示
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        } else {
-            NSLog(@"save to coredata");
+        NSManagedObject *checkForDuplicate = [self checkDupulicationInEntity:NSStringFromClass([History class]) withKey:@"history" withValue:_searchBar.text];
+        if (checkForDuplicate == NULL) {
+            // 重複がない場合はここに処理を書く
+            // エンティティはHistoryという名前のNSManagedObjectのサブクラス。
+            NSManagedObjectContext *context = [appDelegate managedObjectContext];
+            NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:context];
+            
+            // 検索した日時のデータと検索したワードをCore Dataに保存
+            [newManagedObject setValue:[NSDate date] forKey:@"added"];
+            [newManagedObject setValue:_nowSearchStr forKey:@"history"];
+            
+            // Save the context.
+            NSError *error = nil;
+            if (![context save:&error]) {
+                // もしエラーなら内容を表示
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                abort();
+            } else {
+                NSLog(@"save to coredata");
+            }
+
+        }else{
+            // 重複があった場合はここに処理を書く
+            NSLog(@"重複 : %@", [checkForDuplicate description]);
         }
+        
     } else {
         NSLog(@"検索窓は空");
     }
 }
 
+- (void)onlyFirst {
+    // アプリが初めて起動された時だけこのif文を通し、アラートビューを使ってThanksメッセージを表示する。
+    // NSUserDefaultsの取得
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // KEY_BOOLの内容を取得し、BOOL型変数へ格納
+//    BOOL isBool = [defaults boolForKey:@"KEY_BOOL"];
+    // isBoolがNOの場合、...
+//    if (!isBool) {
+    
+        NSString* messageStr = @"ネットにまったく繋がっていない状態でも、調べたい単語をその場ですぐに調べることができるアプリです。";
+    
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"ノーネット辞書とは"
+                                                            message:messageStr
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"OK", nil];
+        [alertView show];
+        
+        // KEY_BOOLにYESを設定
+        [defaults setBool:YES forKey:@"KEY_BOOL"];
+        // 設定を保存
+        [defaults synchronize];
+        NSLog(@"アプリをダウンロードして初回起動時のみ処理");
+//    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self onlyFirst];
     // TableView
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -98,31 +193,26 @@
     _searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     _searchBar.spellCheckingType = UITextSpellCheckingTypeNo;
     
-    // アプリが初めて起動された時だけこのif文を通し、アラートビューを使ってThanksメッセージを表示する。
-    // NSUserDefaultsの取得
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    // KEY_BOOLの内容を取得し、BOOL型変数へ格納
-    BOOL isBool = [defaults boolForKey:@"KEY_BOOL"];
-    // isBoolがNOの場合、...
-    if (!isBool) {
-        
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"ようこそ！"
-                                                            message:@"nowifi辞書は、留学や海外旅行などで海外にでているとき等、ネット環境が整っていない場面でもわからない単語をその場でサクサク検索ができるアプリです。"
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"サクサク検索", nil];
-        [alertView show];
-        
-        // KEY_BOOLにYESを設定
-        [defaults setBool:YES forKey:@"KEY_BOOL"];
-        // 設定を保存
-        [defaults synchronize];
-        NSLog(@"アプリをダウンロードして初回起動時のみ処理");
-    }
-    
     // Core Data 用
     _objectChanges = [NSMutableArray array];
     _sectionChanges = [NSMutableArray array];
+    
+    
+    /* NavigationBar */
+    UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+    // NavigationItemを生成
+    UINavigationItem *navTitle = [[UINavigationItem alloc] initWithTitle:@"ノーネット辞書"];
+    // 設定ボタン生成
+    UIBarButtonItem *btn1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(pushSettingButton)];
+    // NavigationBarの表示
+    navTitle.rightBarButtonItem = btn1;
+    [navBar pushNavigationItem:navTitle animated:YES];
+    
+    [self.view addSubview:navBar];
+}
+
+- (void)pushSettingButton {
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -135,7 +225,11 @@
 #pragma mark tableview
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[self.fetchedResultsController sections] count];
+    return 1;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"履歴";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -147,7 +241,8 @@
     // Cellの生成と初期化
     static NSString* cellIdentifier = @"Cell";
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -161,41 +256,78 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: cellタップ時にlabelに表示されている履歴(文字列)で検索する
-    NSString* string = 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self indicatorStart];
+    // TODO: cellタップ時にlabelに表示されている履歴(文字列)で検索する ※Done
+    NSString* term = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
+    if (term) {
+        UIReferenceLibraryViewController* libraryViewController = [[UIReferenceLibraryViewController alloc] initWithTerm:term];
+        [self presentViewController:libraryViewController animated:YES completion:^(void){
+                                                                                [self indicatorStop];
+                                                                                }];
+    } else {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+    _searchBar.text = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Cellが編集処理に入った時のメソッド
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        
+        NSError *error = nil;
+        if (![context save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
 }
 
 #pragma mark -
 #pragma mark search bar
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    // サーチボタンが押された時の処理
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    // 検索ボタンが押された時の処理
+    [self indicatorStart];
+    [_searchBar resignFirstResponder];
+    _searchBar.showsCancelButton = NO;
     // TODO: modalの遷移の仕方をiOS7っぽくする
     UIReferenceLibraryViewController* libraryViewController = [[UIReferenceLibraryViewController alloc] initWithTerm:_searchBar.text];
-    [self presentViewController:libraryViewController animated:YES completion:nil];
+    [self presentViewController:libraryViewController animated:YES completion:^(void){
+                                                                                        [self indicatorStop];
+                                                                                        }];
     // 検索した文字を履歴データとして保存
     _nowSearchStr = [[NSString alloc] init];
     _nowSearchStr = _searchBar.text;
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    NSLog(@"textdidbegin");
+    // _searchBarがタップされた時の処理
     CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
 	[UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
 	_searchBar.frame = CGRectMake(0, screenSize.height - 240, 320, 44);
-	_tableView.frame = CGRectMake(0, 0, 320, screenSize.height - 240);
+    _searchBar.showsCancelButton = YES;
+	_tableView.frame = CGRectMake(0, 64, 320, screenSize.height - 304);
 	[UIView commitAnimations];
 }
 
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     // キャンセルボタンが押された時の処理
+    _searchBar.text = _nowSearchStr;
+    NSLog(@"_searchBar.text = %@", _searchBar.text);
+    
     [_searchBar resignFirstResponder];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
 	_searchBar.frame = CGRectMake(0, screenSize.height - 24, 320, 44);
-	_tableView.frame = CGRectMake(0, 0, 320, screenSize.height - 24);
+    _searchBar.showsCancelButton = NO;
+	_tableView.frame = CGRectMake(0, 64, 320, screenSize.height - 88);
 	[UIView commitAnimations];
 }
 
