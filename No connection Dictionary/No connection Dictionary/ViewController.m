@@ -153,14 +153,14 @@
     }
 }
 
-- (void)onlyFirst {
+- (void)firstTime {
     // アプリが初めて起動された時だけこのif文を通し、アラートビューを使ってThanksメッセージを表示する。
     // NSUserDefaultsの取得
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     // KEY_BOOLの内容を取得し、BOOL型変数へ格納
-//    BOOL isBool = [defaults boolForKey:@"KEY_BOOL"];
+    BOOL isBool = [defaults boolForKey:@"KEY_BOOL"];
     // isBoolがNOの場合、...
-//    if (!isBool) {
+    if (!isBool) {
     
         NSString* messageStr = @"ネットにまったく繋がっていない状態でも、調べたい単語をその場ですぐに調べることができるアプリです。";
     
@@ -176,13 +176,13 @@
         // 設定を保存
         [defaults synchronize];
         NSLog(@"アプリをダウンロードして初回起動時のみ処理");
-//    }
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self onlyFirst];
+    [self firstTime];
     // TableView
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -212,7 +212,8 @@
 }
 
 - (void)pushSettingButton {
-    
+    SettingViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingViewController"];
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -252,6 +253,14 @@
 
     // TODO: cellには検索履歴と必要なら検索した日時を取得して表示する ※Done
     cell.textLabel.text = [object valueForKey:@"history"];
+    
+    // 検索日時表示用ラベル
+    UILabel* rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(220,12, 100, 20)];
+    NSDateFormatter* df = [[NSDateFormatter alloc] init];
+    df.dateFormat = @"MM/dd HH:mm";
+    rightLabel.text = [df stringFromDate:[object valueForKey:@"added"]];
+    rightLabel.textColor = [UIColor grayColor];
+    [cell addSubview:rightLabel];
     
     return cell;
 }

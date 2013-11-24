@@ -11,6 +11,7 @@
 #import <CoreData/CoreData.h>  // Core Data を使ってデータを管理するために使用
 #import "History.h"
 #import "AppDelegate.h"
+#import "SettingViewController.h"
 
 @interface ViewController : UIViewController <UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,NSFetchedResultsControllerDelegate> {
     // Core Data 用
