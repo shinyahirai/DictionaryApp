@@ -25,6 +25,7 @@
 		654F39B2183F899C00A41EF5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654F3994183F899C00A41EF5 /* UIKit.framework */; };
 		654F39BA183F899C00A41EF5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 654F39B8183F899C00A41EF5 /* InfoPlist.strings */; };
 		654F39BC183F899C00A41EF5 /* No_connection_DictionaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F39BB183F899C00A41EF5 /* No_connection_DictionaryTests.m */; };
+		65A225871842304500ED2A36 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A225861842304500ED2A36 /* Social.framework */; };
 		65B5A1871841446C00EB3707 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B5A1861841446C00EB3707 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		654F39B7183F899C00A41EF5 /* No connection DictionaryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "No connection DictionaryTests-Info.plist"; sourceTree = "<group>"; };
 		654F39B9183F899C00A41EF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		654F39BB183F899C00A41EF5 /* No_connection_DictionaryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = No_connection_DictionaryTests.m; sourceTree = "<group>"; };
+		65A225861842304500ED2A36 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		65B5A1861841446C00EB3707 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65A225871842304500ED2A36 /* Social.framework in Frameworks */,
 				65B5A1871841446C00EB3707 /* QuartzCore.framework in Frameworks */,
 				654ADB4F184004D100241DDB /* CoreData.framework in Frameworks */,
 				654F3993183F899C00A41EF5 /* CoreGraphics.framework in Frameworks */,
@@ -115,6 +118,7 @@
 		654F398F183F899C00A41EF5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65A225861842304500ED2A36 /* Social.framework */,
 				65B5A1861841446C00EB3707 /* QuartzCore.framework */,
 				654ADB4E184004D100241DDB /* CoreData.framework */,
 				654F3990183F899C00A41EF5 /* Foundation.framework */,

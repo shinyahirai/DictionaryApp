@@ -198,7 +198,7 @@
     _sectionChanges = [NSMutableArray array];
     
     
-    /* NavigationBar */
+    // NavigationBarの右側にセッティング画面に遷移するためのボタンを作成
     UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
     // NavigationItemを生成
     UINavigationItem *navTitle = [[UINavigationItem alloc] initWithTitle:@"ノーネット辞書"];
@@ -212,6 +212,7 @@
 }
 
 - (void)pushSettingButton {
+    // セッティング画面にはコードで遷移
     SettingViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingViewController"];
     [self presentViewController:viewController animated:YES completion:nil];
 }

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Social/Social.h>
 #import "ViewController.h"
 
 @interface SettingViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
