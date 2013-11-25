@@ -224,6 +224,8 @@
     cell.textLabel.text = [object valueForKey:@"history"];
     
     // 検索日時表示用ラベル
+    // deleteのあとにもう一度データを入れると時間がダブルバグが残ってる
+    // 予測：多分時間表示のラベルが自作ラベルのため、CoreData + TableViewの削除ではキャッシュが残ってて消えない
     UILabel* rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(220,12, 100, 20)];
     NSDateFormatter* df = [[NSDateFormatter alloc] init];
     df.dateFormat = @"MM/dd HH:mm";
@@ -311,6 +313,12 @@
 #pragma mark -
 #pragma mark search bar & keyboard
 - (void)keyboardWillShow:(NSNotification*)notification {
+
+    // _searchBarがタップされた時の処理
+    CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
+	[UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    
     // viewDidloadで登録したnotificationの情報を取得
     NSDictionary *userInfo;
     userInfo = [notification userInfo];
@@ -320,15 +328,19 @@
     keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
     CGFloat keyboardTop = [[UIScreen mainScreen] bounds].size.height - (keyboardFrame.size.height + 44.f );   // 55.f:予測変換領域の高さ
-    // NSLog(@"keyboardtop = %f",keyboardTop);
+    NSLog(@"keyboardtop = %f",keyboardTop);
     
-    // _searchBarがタップされた時の処理
-    CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
-	[UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
+    // キーボードの高さで条件分岐
+    if (keyboardTop == 308.000000) {
+        // キーボードの高さ + searchBarの高さを引いたサイズでtableviewを表示
+        _tableView.frame = CGRectMake(0, 64, 320, screenSize.height - (keyboardTop - 4.f));
+    } else if (keyboardTop == 272.000000) {
+        // キーボードの高さ + 日本語変換が出た場合の高さ + searchBarの高さを引いたサイズでtableviewを表示
+        _tableView.frame = CGRectMake(0, 64, 320, screenSize.height - (keyboardTop + 68.f));
+    }
+    
 	_searchBar.frame = CGRectMake(0, keyboardTop, 320, 44);
     _searchBar.showsCancelButton = YES;
-	_tableView.frame = CGRectMake(0, 64, 320, screenSize.height - (keyboardTop + 70.f));  // キーボードの高さ + 日本語変換が出た場合の高さ + searchBarの高さ
 	[UIView commitAnimations];
 }
 
@@ -352,8 +364,6 @@
         
         // _nowSearchStrがnil,nullではなく、文字の長さが0ではなければ、要するに空でなければCore Dataに保存し、tableviewに履歴として表示
         if (![_nowSearchStr isEqual:[NSNull null]] && [_nowSearchStr length] > 0) {
-//            NSLog(@"_nowSearchStr = %@",_nowSearchStr);
-//            NSLog(@"_searchBar.text= %@",_searchBar.text);
             
             NSManagedObject *checkForDuplicate = [self checkDupulicationInEntity:NSStringFromClass([History class]) withKey:@"history" withValue:_nowSearchStr];
             if (checkForDuplicate == NULL) {
@@ -392,11 +402,11 @@
 
 //- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     // _searchBarがタップされた時の処理
+    // keyboardWillShowメソッドに移植したので現在は未使用
 //}
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     // キャンセルボタンが押された時の処理
-    
     [_searchBar resignFirstResponder];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -509,8 +519,8 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-//    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
 }
 
 @end
