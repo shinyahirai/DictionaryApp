@@ -121,8 +121,10 @@
     
     // _nowSearchStrがnil,nullではなく、文字の長さが0ではなければ、要するに空でなければCore Dataに保存し、tableviewに履歴として表示
     if (![_nowSearchStr isEqual:[NSNull null]] && [_nowSearchStr length] > 0) {
+        NSLog(@"_nowSearchStr = %@",_nowSearchStr);
+        NSLog(@"_searchBar.text= %@",_searchBar.text);
         
-        NSManagedObject *checkForDuplicate = [self checkDupulicationInEntity:NSStringFromClass([History class]) withKey:@"history" withValue:_searchBar.text];
+        NSManagedObject *checkForDuplicate = [self checkDupulicationInEntity:NSStringFromClass([History class]) withKey:@"history" withValue:_nowSearchStr];
         if (checkForDuplicate == NULL) {
             // 重複がない場合はここに処理を書く
             // エンティティはHistoryという名前のNSManagedObjectのサブクラス。
@@ -197,8 +199,12 @@
     _objectChanges = [NSMutableArray array];
     _sectionChanges = [NSMutableArray array];
     
+    // キーボードが表示された時の通知を登録する
+    NSNotificationCenter *center;
+    center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
-    /* NavigationBar */
+    // NavigationBarの右側にセッティング画面に遷移するためのボタンを作成
     UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
     // NavigationItemを生成
     UINavigationItem *navTitle = [[UINavigationItem alloc] initWithTitle:@"ノーネット辞書"];
@@ -212,6 +218,7 @@
 }
 
 - (void)pushSettingButton {
+    // セッティング画面にはコードで遷移
     SettingViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingViewController"];
     [self presentViewController:viewController animated:YES completion:nil];
 }
@@ -298,7 +305,29 @@
 }
 
 #pragma mark -
-#pragma mark search bar
+#pragma mark search bar & keyboard
+- (void)keyboardWillShow:(NSNotification*)notification {
+    // viewDidloadで登録したnotificationの情報を取得
+    NSDictionary *userInfo;
+    userInfo = [notification userInfo];
+    
+    // 1. キーボードの top を取得する
+    CGRect keyboardFrame;
+    keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    CGFloat keyboardTop = [[UIScreen mainScreen] bounds].size.height - (keyboardFrame.size.height + 44.f );   // 55.f:予測変換領域の高さ
+    // NSLog(@"keyboardtop = %f",keyboardTop);
+    
+    // _searchBarがタップされた時の処理
+    CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
+	[UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+	_searchBar.frame = CGRectMake(0, keyboardTop, 320, 44);
+    _searchBar.showsCancelButton = YES;
+	_tableView.frame = CGRectMake(0, 64, 320, screenSize.height - (keyboardTop + 70.f));  // キーボードの高さ + 日本語変換が出た場合の高さ + searchBarの高さ
+	[UIView commitAnimations];
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     // 検索ボタンが押された時の処理
     [self indicatorStart];
@@ -312,23 +341,15 @@
     // 検索した文字を履歴データとして保存
     _nowSearchStr = [[NSString alloc] init];
     _nowSearchStr = _searchBar.text;
+    
 }
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     // _searchBarがタップされた時の処理
-    CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
-	[UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-	_searchBar.frame = CGRectMake(0, screenSize.height - 240, 320, 44);
-    _searchBar.showsCancelButton = YES;
-	_tableView.frame = CGRectMake(0, 64, 320, screenSize.height - 304);
-	[UIView commitAnimations];
-}
+//}
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     // キャンセルボタンが押された時の処理
-    _searchBar.text = _nowSearchStr;
-    NSLog(@"_searchBar.text = %@", _searchBar.text);
     
     [_searchBar resignFirstResponder];
     [UIView beginAnimations:nil context:NULL];
@@ -442,8 +463,8 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+//    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
 }
 
 @end

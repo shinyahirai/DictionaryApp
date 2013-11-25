@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Social/Social.h>
+#import "AppDelegate.h"
 #import "ViewController.h"
 
-@interface SettingViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
+@interface SettingViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
