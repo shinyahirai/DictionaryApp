@@ -114,45 +114,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    /*
-     Core Dataに保存する処理
-     */
-     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    // _nowSearchStrがnil,nullではなく、文字の長さが0ではなければ、要するに空でなければCore Dataに保存し、tableviewに履歴として表示
-    if (![_nowSearchStr isEqual:[NSNull null]] && [_nowSearchStr length] > 0) {
-        NSLog(@"_nowSearchStr = %@",_nowSearchStr);
-        NSLog(@"_searchBar.text= %@",_searchBar.text);
-        
-        NSManagedObject *checkForDuplicate = [self checkDupulicationInEntity:NSStringFromClass([History class]) withKey:@"history" withValue:_nowSearchStr];
-        if (checkForDuplicate == NULL) {
-            // 重複がない場合はここに処理を書く
-            // エンティティはHistoryという名前のNSManagedObjectのサブクラス。
-            NSManagedObjectContext *context = [appDelegate managedObjectContext];
-            NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:context];
-            
-            // 検索した日時のデータと検索したワードをCore Dataに保存
-            [newManagedObject setValue:[NSDate date] forKey:@"added"];
-            [newManagedObject setValue:_nowSearchStr forKey:@"history"];
-            
-            // Save the context.
-            NSError *error = nil;
-            if (![context save:&error]) {
-                // もしエラーなら内容を表示
-                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                abort();
-            } else {
-                NSLog(@"save to coredata");
-            }
-
-        }else{
-            // 重複があった場合はここに処理を書く
-            NSLog(@"重複 : %@", [checkForDuplicate description]);
-        }
-        
-    } else {
-        NSLog(@"検索窓は空");
-    }
+    NSLog(@"viewWillAppear");
 }
 
 - (void)firstTime {
@@ -282,9 +244,51 @@
                                                                                 [self indicatorStop];
                                                                                 }];
     } else {
+        // こいつ何？
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     _searchBar.text = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
+    
+    
+    /*
+     Core Dataに保存する処理
+     */
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    // _nowSearchStrがnil,nullではなく、文字の長さが0ではなければ、要するに空でなければCore Dataに保存し、tableviewに履歴として表示
+    if (![_nowSearchStr isEqual:[NSNull null]] && [_nowSearchStr length] > 0) {
+        NSLog(@"_nowSearchStr = %@",_nowSearchStr);
+        NSLog(@"_searchBar.text= %@",_searchBar.text);
+        
+        NSManagedObject *checkForDuplicate = [self checkDupulicationInEntity:NSStringFromClass([History class]) withKey:@"history" withValue:_nowSearchStr];
+        if (checkForDuplicate == NULL) {
+            // 重複がない場合はここに処理を書く
+            // エンティティはHistoryという名前のNSManagedObjectのサブクラス。
+            NSManagedObjectContext *context = [appDelegate managedObjectContext];
+            NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:context];
+            
+            // 検索した日時のデータと検索したワードをCore Dataに保存
+            [newManagedObject setValue:[NSDate date] forKey:@"added"];
+            [newManagedObject setValue:_nowSearchStr forKey:@"history"];
+            
+            // Save the context.
+            NSError *error = nil;
+            if (![context save:&error]) {
+                // もしエラーなら内容を表示
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                abort();
+            } else {
+                NSLog(@"save to coredata");
+            }
+            
+        }else{
+            // 重複があった場合はここに処理を書く
+            NSLog(@"重複 : %@", [checkForDuplicate description]);
+        }
+        
+    } else {
+        NSLog(@"検索窓は空");
+    }
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -336,12 +340,54 @@
     // TODO: modalの遷移の仕方をiOS7っぽくする
     UIReferenceLibraryViewController* libraryViewController = [[UIReferenceLibraryViewController alloc] initWithTerm:_searchBar.text];
     [self presentViewController:libraryViewController animated:YES completion:^(void){
-                                                                                        [self indicatorStop];
-                                                                                        }];
+        NSLog(@"_nowSearchStr = %@",_nowSearchStr);
+        NSLog(@"_searchBar.text= %@",_searchBar.text);
+
+        [self indicatorStop];
+        
+        /*
+         Core Dataに保存する処理
+         */
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        
+        // _nowSearchStrがnil,nullではなく、文字の長さが0ではなければ、要するに空でなければCore Dataに保存し、tableviewに履歴として表示
+        if (![_nowSearchStr isEqual:[NSNull null]] && [_nowSearchStr length] > 0) {
+//            NSLog(@"_nowSearchStr = %@",_nowSearchStr);
+//            NSLog(@"_searchBar.text= %@",_searchBar.text);
+            
+            NSManagedObject *checkForDuplicate = [self checkDupulicationInEntity:NSStringFromClass([History class]) withKey:@"history" withValue:_nowSearchStr];
+            if (checkForDuplicate == NULL) {
+                // 重複がない場合はここに処理を書く
+                // エンティティはHistoryという名前のNSManagedObjectのサブクラス。
+                NSManagedObjectContext *context = [appDelegate managedObjectContext];
+                NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:context];
+                
+                // 検索した日時のデータと検索したワードをCore Dataに保存
+                [newManagedObject setValue:[NSDate date] forKey:@"added"];
+                [newManagedObject setValue:_nowSearchStr forKey:@"history"];
+                
+                // Save the context.
+                NSError *error = nil;
+                if (![context save:&error]) {
+                    // もしエラーなら内容を表示
+                    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                    abort();
+                } else {
+                    NSLog(@"save to coredata");
+                }
+                
+            }else{
+                // 重複があった場合はここに処理を書く
+                NSLog(@"重複 : %@", [checkForDuplicate description]);
+            }
+            
+        } else {
+            NSLog(@"検索窓は空");
+        }
+    }];
     // 検索した文字を履歴データとして保存
     _nowSearchStr = [[NSString alloc] init];
     _nowSearchStr = _searchBar.text;
-    
 }
 
 //- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
