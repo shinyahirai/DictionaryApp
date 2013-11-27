@@ -44,6 +44,38 @@
     UILabel *_processinglabel;
 }
 
+@synthesize adBannerView;
+
+#pragma mark adBannerView
+//広告の初期化
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    adBannerView = [[ADBannerView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 50.0)];
+    adBannerView.delegate = self;
+    [adBannerView setHidden:YES];
+//    CGRect bannerFrame = adBannerView.frame;
+//    bannerFrame.origin.y = self.view.frame.size.height - self.navigationBar.frame.size.height - adBannerView.frame.size.height;
+//    self.adBannerView.frame = bannerFrame;
+    [self.view addSubview:adBannerView];
+}
+
+//広告の在庫がある場合は表示する
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    [banner setHidden:NO];
+}
+
+- (void)bannerViewActionDidFinish:(ADBannerView *)banner {
+}
+
+//広告の在庫がない場合は非表示にする
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    [banner setHidden:YES];
+}
+
+#pragma mark -
 #pragma mark roading view
 -(void) indicatorStart {
     // スタートメソッド
@@ -153,21 +185,30 @@
     
     // SearchBar
     _searchBar.delegate = self;
-    // TODO: 以下２つのプロパティについて調査
     _searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     _searchBar.spellCheckingType = UITextSpellCheckingTypeNo;
+    [UISearchBar appearance].barTintColor = [UIColor colorWithRed:1.00 green:0.39 blue:0.28 alpha:1.00];
+    [UISearchBar appearance].tintColor = [UIColor whiteColor];
     
     // Core Data 用
     _objectChanges = [NSMutableArray array];
     _sectionChanges = [NSMutableArray array];
     
-    // キーボードが表示された時の通知を登録する
+    /*
+     キーボードが表示された時の通知を登録する
+     2種類の書き方がある
+     */
+    // 1
     NSNotificationCenter *center;
     center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    // 2
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
     
     // NavigationBarの右側にセッティング画面に遷移するためのボタンを作成
-    UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+    // TODO: 広告解除用     UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+    UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
     // NavigationItemを生成
     UINavigationItem *navTitle = [[UINavigationItem alloc] initWithTitle:@"ノーネット辞書"];
     // 設定ボタン生成
@@ -175,7 +216,14 @@
     // NavigationBarの表示
     navTitle.rightBarButtonItem = btn1;
     [navBar pushNavigationItem:navTitle animated:YES];
+    [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:1.00 green:0.39 blue:0.28 alpha:1.00];
+    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     
+    // TODO: 広告解除用     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"Header"];
+
     [self.view addSubview:navBar];
 }
 
@@ -198,8 +246,16 @@
     return 1;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"履歴";
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    
+//    return [NSString stringWithFormat:@"セクション%d", section];
+//}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UITableViewHeaderFooterView *tableViewHeader = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:@"Header"];
+    tableViewHeader.textLabel.text = @"履歴";
+    tableViewHeader.textLabel.textColor = [UIColor colorWithRed:0.13 green:0.55 blue:0.13 alpha:1.00];
+    return tableViewHeader;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -220,25 +276,24 @@
     
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
-    // TODO: cellには検索履歴と必要なら検索した日時を取得して表示する ※Done
     cell.textLabel.text = [object valueForKey:@"history"];
+    cell.textLabel.textColor = [UIColor colorWithRed:1.00 green:0.39 blue:0.28 alpha:1.00];
     
     // 検索日時表示用ラベル
     // deleteのあとにもう一度データを入れると時間がダブルバグが残ってる
     // 予測：多分時間表示のラベルが自作ラベルのため、CoreData + TableViewの削除ではキャッシュが残ってて消えない
-    UILabel* rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(220,12, 100, 20)];
-    NSDateFormatter* df = [[NSDateFormatter alloc] init];
-    df.dateFormat = @"MM/dd HH:mm";
-    rightLabel.text = [df stringFromDate:[object valueForKey:@"added"]];
-    rightLabel.textColor = [UIColor grayColor];
-    [cell addSubview:rightLabel];
+//    UILabel* rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(220,12, 100, 20)];
+//    NSDateFormatter* df = [[NSDateFormatter alloc] init];
+//    df.dateFormat = @"MM/dd HH:mm";
+//    rightLabel.text = [df stringFromDate:[object valueForKey:@"added"]];
+//    rightLabel.textColor = [UIColor grayColor];
+//    [cell addSubview:rightLabel];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self indicatorStart];
-    // TODO: cellタップ時にlabelに表示されている履歴(文字列)で検索する ※Done
     NSString* term = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
     if (term) {
         UIReferenceLibraryViewController* libraryViewController = [[UIReferenceLibraryViewController alloc] initWithTerm:term];
@@ -313,43 +368,79 @@
 #pragma mark -
 #pragma mark search bar & keyboard
 - (void)keyboardWillShow:(NSNotification*)notification {
-
-    // _searchBarがタップされた時の処理
+    /*
+     キーボードが表示される前にイベントをキャッチして処理をする
+     */
+    
     CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
-	[UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
     
-    // viewDidloadで登録したnotificationの情報を取得
-    NSDictionary *userInfo;
-    userInfo = [notification userInfo];
+    NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
-    // 1. キーボードの top を取得する
-    CGRect keyboardFrame;
-    keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
     
-    CGFloat keyboardTop = [[UIScreen mainScreen] bounds].size.height - (keyboardFrame.size.height + 44.f );   // 55.f:予測変換領域の高さ
-    NSLog(@"keyboardtop = %f",keyboardTop);
+    // UIViewAnimationCurve　を UIViewAnimationOptionに変換
+    UIViewAnimationOptions animationOptions = animationCurve << 16;
     
-    // キーボードの高さで条件分岐
-    if (keyboardTop == 308.000000) {
-        // キーボードの高さ + searchBarの高さを引いたサイズでtableviewを表示
-        _tableView.frame = CGRectMake(0, 64, 320, screenSize.height - (keyboardTop - 4.f));
-    } else if (keyboardTop == 272.000000) {
-        // キーボードの高さ + 日本語変換が出た場合の高さ + searchBarの高さを引いたサイズでtableviewを表示
-        _tableView.frame = CGRectMake(0, 64, 320, screenSize.height - (keyboardTop + 68.f));
-    }
-    
-	_searchBar.frame = CGRectMake(0, keyboardTop, 320, 44);
-    _searchBar.showsCancelButton = YES;
-	[UIView commitAnimations];
+    // keyboard の上に TextField を移動する
+    [UIView animateWithDuration:animationDuration
+                          delay:0.0
+                        options:animationOptions
+                     animations:^{
+                         // 1. キーボードの top を取得する
+                         CGRect keyboardFrame;
+                         keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+                         
+                         CGFloat keyboardTop = [[UIScreen mainScreen] bounds].size.height - (keyboardFrame.size.height + 44.f );   // 55.f:予測変換領域の高さ
+                         NSLog(@"keyboardtop = %f",keyboardTop);
+                         
+                         // キーボードの高さで条件分岐
+                         if (keyboardTop == 308.000000) {
+                             // キーボードの高さ + searchBarの高さを引いたサイズでtableviewを表示
+                             // TODO: 広告解除用     _tableView.frame = CGRectMake(0, 64, 320, screenSize.height - (keyboardTop - 4.f));
+                             _tableView.frame = CGRectMake(0, 114, 320, screenSize.height - (keyboardTop + 46.f));
+                         } else if (keyboardTop == 272.000000) {
+                             // キーボードの高さ + 日本語変換が出た場合の高さ + searchBarの高さを引いたサイズでtableviewを表示
+                             // TODO: 広告解除用     _tableView.frame = CGRectMake(0, 64, 320, screenSize.height - (keyboardTop + 68.f));
+                             _tableView.frame = CGRectMake(0, 114, 320, screenSize.height - (keyboardTop + 118.f));
+                         }
+                         
+                         _searchBar.frame = CGRectMake(0, keyboardTop, 320, 44);
+                         _searchBar.showsCancelButton = YES;
+                         NSLog(@"キーボード");
+                     }
+                     completion:^(BOOL finished) {}];
 }
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    
+    NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    
+    // UIViewAnimationCurve　を UIViewAnimationOptionに変換
+    UIViewAnimationOptions animationOptions = animationCurve << 16;
+    
+    // 元の位置に戻す
+    [UIView animateWithDuration:animationDuration
+                          delay:0.0
+                        options:animationOptions
+                     animations:^{
+                         CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
+                         _searchBar.frame = CGRectMake(0, screenSize.height - 24, 320, 44);
+                         _searchBar.showsCancelButton = NO;
+                         // TODO: 広告解除用     _tableView.frame = CGRectMake(0, 64, 320, screenSize.height - 88);
+                         _tableView.frame = CGRectMake(0, 114, 320, screenSize.height - 138);
+                     }
+                     completion:^(BOOL finished) {}];
+}
+
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     // 検索ボタンが押された時の処理
     [self indicatorStart];
     [_searchBar resignFirstResponder];
     _searchBar.showsCancelButton = NO;
-    // TODO: modalの遷移の仕方をiOS7っぽくする
     UIReferenceLibraryViewController* libraryViewController = [[UIReferenceLibraryViewController alloc] initWithTerm:_searchBar.text];
     [self presentViewController:libraryViewController animated:YES completion:^(void){
         NSLog(@"_nowSearchStr = %@",_nowSearchStr);
@@ -408,13 +499,6 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     // キャンセルボタンが押された時の処理
     [_searchBar resignFirstResponder];
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-    CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
-	_searchBar.frame = CGRectMake(0, screenSize.height - 24, 320, 44);
-    _searchBar.showsCancelButton = NO;
-	_tableView.frame = CGRectMake(0, 64, 320, screenSize.height - 88);
-	[UIView commitAnimations];
 }
 
 #pragma mark -
