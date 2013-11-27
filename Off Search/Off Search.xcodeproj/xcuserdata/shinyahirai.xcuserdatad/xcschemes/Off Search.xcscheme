@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "654F398C183F899C00A41EF5"
-               BuildableName = "No connection Dictionary.app"
-               BlueprintName = "No connection Dictionary"
-               ReferencedContainer = "container:No connection Dictionary.xcodeproj">
+               BuildableName = "Off Search.app"
+               BlueprintName = "Off Search"
+               ReferencedContainer = "container:Off Search.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "654F39AD183F899C00A41EF5"
-               BuildableName = "No connection DictionaryTests.xctest"
-               BlueprintName = "No connection DictionaryTests"
-               ReferencedContainer = "container:No connection Dictionary.xcodeproj">
+               BuildableName = "Off SearchTests.xctest"
+               BlueprintName = "Off SearchTests"
+               ReferencedContainer = "container:Off Search.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "654F398C183F899C00A41EF5"
-            BuildableName = "No connection Dictionary.app"
-            BlueprintName = "No connection Dictionary"
-            ReferencedContainer = "container:No connection Dictionary.xcodeproj">
+            BuildableName = "Off Search.app"
+            BlueprintName = "Off Search"
+            ReferencedContainer = "container:Off Search.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "654F398C183F899C00A41EF5"
-            BuildableName = "No connection Dictionary.app"
-            BlueprintName = "No connection Dictionary"
-            ReferencedContainer = "container:No connection Dictionary.xcodeproj">
+            BuildableName = "Off Search.app"
+            BlueprintName = "Off Search"
+            ReferencedContainer = "container:Off Search.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "654F398C183F899C00A41EF5"
-            BuildableName = "No connection Dictionary.app"
-            BlueprintName = "No connection Dictionary"
-            ReferencedContainer = "container:No connection Dictionary.xcodeproj">
+            BuildableName = "Off Search.app"
+            BlueprintName = "Off Search"
+            ReferencedContainer = "container:Off Search.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

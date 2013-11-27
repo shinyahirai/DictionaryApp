@@ -26,8 +26,6 @@
 		654F39B0183F899C00A41EF5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654F39AF183F899C00A41EF5 /* XCTest.framework */; };
 		654F39B1183F899C00A41EF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654F3990183F899C00A41EF5 /* Foundation.framework */; };
 		654F39B2183F899C00A41EF5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654F3994183F899C00A41EF5 /* UIKit.framework */; };
-		654F39BA183F899C00A41EF5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 654F39B8183F899C00A41EF5 /* InfoPlist.strings */; };
-		654F39BC183F899C00A41EF5 /* No_connection_DictionaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F39BB183F899C00A41EF5 /* No_connection_DictionaryTests.m */; };
 		6594DC2818462C5D00957C40 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6594DC2718462C5D00957C40 /* iAd.framework */; };
 		65A225871842304500ED2A36 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A225861842304500ED2A36 /* Social.framework */; };
 		65B5A1871841446C00EB3707 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B5A1861841446C00EB3707 /* QuartzCore.framework */; };
@@ -53,28 +51,25 @@
 		654ADB4B184004BB00241DDB /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		654ADB4C184004BB00241DDB /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		654ADB4E184004D100241DDB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		654F398D183F899C00A41EF5 /* No connection Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "No connection Dictionary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		654F398D183F899C00A41EF5 /* Off Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Off Search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		654F3990183F899C00A41EF5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		654F3992183F899C00A41EF5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		654F3994183F899C00A41EF5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		654F3998183F899C00A41EF5 /* No connection Dictionary-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "No connection Dictionary-Info.plist"; sourceTree = "<group>"; };
 		654F399A183F899C00A41EF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		654F399C183F899C00A41EF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		654F399E183F899C00A41EF5 /* No connection Dictionary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "No connection Dictionary-Prefix.pch"; sourceTree = "<group>"; };
+		654F399E183F899C00A41EF5 /* Off Search-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Off Search-Prefix.pch"; sourceTree = "<group>"; };
 		654F399F183F899C00A41EF5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		654F39A0183F899C00A41EF5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		654F39A3183F899C00A41EF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		654F39A5183F899C00A41EF5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		654F39A6183F899C00A41EF5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		654F39A8183F899C00A41EF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		654F39AE183F899C00A41EF5 /* No connection DictionaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "No connection DictionaryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		654F39AE183F899C00A41EF5 /* Off SearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Off SearchTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		654F39AF183F899C00A41EF5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		654F39B7183F899C00A41EF5 /* No connection DictionaryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "No connection DictionaryTests-Info.plist"; sourceTree = "<group>"; };
-		654F39B9183F899C00A41EF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		654F39BB183F899C00A41EF5 /* No_connection_DictionaryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = No_connection_DictionaryTests.m; sourceTree = "<group>"; };
 		6594DC2718462C5D00957C40 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		65A225861842304500ED2A36 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		65B5A1861841446C00EB3707 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		65C22D4518463F5900DC3232 /* Off Search-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Off Search-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +103,7 @@
 		654F3984183F899C00A41EF5 = {
 			isa = PBXGroup;
 			children = (
-				654F3996183F899C00A41EF5 /* No connection Dictionary */,
-				654F39B5183F899C00A41EF5 /* No connection DictionaryTests */,
+				654F3996183F899C00A41EF5 /* Off Search */,
 				654F398F183F899C00A41EF5 /* Frameworks */,
 				654F398E183F899C00A41EF5 /* Products */,
 			);
@@ -118,8 +112,8 @@
 		654F398E183F899C00A41EF5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				654F398D183F899C00A41EF5 /* No connection Dictionary.app */,
-				654F39AE183F899C00A41EF5 /* No connection DictionaryTests.xctest */,
+				654F398D183F899C00A41EF5 /* Off Search.app */,
+				654F39AE183F899C00A41EF5 /* Off SearchTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,7 +133,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		654F3996183F899C00A41EF5 /* No connection Dictionary */ = {
+		654F3996183F899C00A41EF5 /* Off Search */ = {
 			isa = PBXGroup;
 			children = (
 				65B5A18518401DE900EB3707 /* model */,
@@ -153,35 +147,17 @@
 				654F39A8183F899C00A41EF5 /* Images.xcassets */,
 				654F3997183F899C00A41EF5 /* Supporting Files */,
 			);
-			path = "No connection Dictionary";
+			path = "Off Search";
 			sourceTree = "<group>";
 		};
 		654F3997183F899C00A41EF5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				65C22D4518463F5900DC3232 /* Off Search-Info.plist */,
 				65F775F01843B980006BD964 /* images */,
-				654F3998183F899C00A41EF5 /* No connection Dictionary-Info.plist */,
 				654F3999183F899C00A41EF5 /* InfoPlist.strings */,
 				654F399C183F899C00A41EF5 /* main.m */,
-				654F399E183F899C00A41EF5 /* No connection Dictionary-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		654F39B5183F899C00A41EF5 /* No connection DictionaryTests */ = {
-			isa = PBXGroup;
-			children = (
-				654F39BB183F899C00A41EF5 /* No_connection_DictionaryTests.m */,
-				654F39B6183F899C00A41EF5 /* Supporting Files */,
-			);
-			path = "No connection DictionaryTests";
-			sourceTree = "<group>";
-		};
-		654F39B6183F899C00A41EF5 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				654F39B7183F899C00A41EF5 /* No connection DictionaryTests-Info.plist */,
-				654F39B8183F899C00A41EF5 /* InfoPlist.strings */,
+				654F399E183F899C00A41EF5 /* Off Search-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -209,9 +185,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		654F398C183F899C00A41EF5 /* No connection Dictionary */ = {
+		654F398C183F899C00A41EF5 /* Off Search */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 654F39BF183F899C00A41EF5 /* Build configuration list for PBXNativeTarget "No connection Dictionary" */;
+			buildConfigurationList = 654F39BF183F899C00A41EF5 /* Build configuration list for PBXNativeTarget "Off Search" */;
 			buildPhases = (
 				654F3989183F899C00A41EF5 /* Sources */,
 				654F398A183F899C00A41EF5 /* Frameworks */,
@@ -221,14 +197,14 @@
 			);
 			dependencies = (
 			);
-			name = "No connection Dictionary";
+			name = "Off Search";
 			productName = "No connection Dictionary";
-			productReference = 654F398D183F899C00A41EF5 /* No connection Dictionary.app */;
+			productReference = 654F398D183F899C00A41EF5 /* Off Search.app */;
 			productType = "com.apple.product-type.application";
 		};
-		654F39AD183F899C00A41EF5 /* No connection DictionaryTests */ = {
+		654F39AD183F899C00A41EF5 /* Off SearchTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 654F39C2183F899C00A41EF5 /* Build configuration list for PBXNativeTarget "No connection DictionaryTests" */;
+			buildConfigurationList = 654F39C2183F899C00A41EF5 /* Build configuration list for PBXNativeTarget "Off SearchTests" */;
 			buildPhases = (
 				654F39AA183F899C00A41EF5 /* Sources */,
 				654F39AB183F899C00A41EF5 /* Frameworks */,
@@ -239,9 +215,9 @@
 			dependencies = (
 				654F39B4183F899C00A41EF5 /* PBXTargetDependency */,
 			);
-			name = "No connection DictionaryTests";
+			name = "Off SearchTests";
 			productName = "No connection DictionaryTests";
-			productReference = 654F39AE183F899C00A41EF5 /* No connection DictionaryTests.xctest */;
+			productReference = 654F39AE183F899C00A41EF5 /* Off SearchTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -258,7 +234,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 654F3988183F899C00A41EF5 /* Build configuration list for PBXProject "No connection Dictionary" */;
+			buildConfigurationList = 654F3988183F899C00A41EF5 /* Build configuration list for PBXProject "Off Search" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -271,8 +247,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				654F398C183F899C00A41EF5 /* No connection Dictionary */,
-				654F39AD183F899C00A41EF5 /* No connection DictionaryTests */,
+				654F398C183F899C00A41EF5 /* Off Search */,
+				654F39AD183F899C00A41EF5 /* Off SearchTests */,
 			);
 		};
 /* End PBXProject section */
@@ -295,7 +271,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				654F39BA183F899C00A41EF5 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +294,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				654F39BC183F899C00A41EF5 /* No_connection_DictionaryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +302,7 @@
 /* Begin PBXTargetDependency section */
 		654F39B4183F899C00A41EF5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 654F398C183F899C00A41EF5 /* No connection Dictionary */;
+			target = 654F398C183F899C00A41EF5 /* Off Search */;
 			targetProxy = 654F39B3183F899C00A41EF5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -348,14 +322,6 @@
 				654F39A3183F899C00A41EF5 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		654F39B8183F899C00A41EF5 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				654F39B9183F899C00A41EF5 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -440,10 +406,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Shinya Hirai (6HQU2J742P)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "No connection Dictionary/No connection Dictionary-Prefix.pch";
-				INFOPLIST_FILE = "No connection Dictionary/No connection Dictionary-Info.plist";
+				GCC_PREFIX_HEADER = "Off Search/Off Search-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Off Search/Off Search-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Off Search";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -455,10 +421,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "No connection Dictionary/No connection Dictionary-Prefix.pch";
-				INFOPLIST_FILE = "No connection Dictionary/No connection Dictionary-Info.plist";
+				GCC_PREFIX_HEADER = "Off Search/Off Search-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Off Search/Off Search-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Off Search";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -480,8 +446,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "No connection DictionaryTests/No connection DictionaryTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "No connection DictionaryTests/Off SearchTests-Info.plist";
+				PRODUCT_NAME = "Off SearchTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -499,8 +465,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "No connection Dictionary/No connection Dictionary-Prefix.pch";
-				INFOPLIST_FILE = "No connection DictionaryTests/No connection DictionaryTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "No connection DictionaryTests/Off SearchTests-Info.plist";
+				PRODUCT_NAME = "Off SearchTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -509,7 +475,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		654F3988183F899C00A41EF5 /* Build configuration list for PBXProject "No connection Dictionary" */ = {
+		654F3988183F899C00A41EF5 /* Build configuration list for PBXProject "Off Search" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				654F39BD183F899C00A41EF5 /* Debug */,
@@ -518,7 +484,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		654F39BF183F899C00A41EF5 /* Build configuration list for PBXNativeTarget "No connection Dictionary" */ = {
+		654F39BF183F899C00A41EF5 /* Build configuration list for PBXNativeTarget "Off Search" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				654F39C0183F899C00A41EF5 /* Debug */,
@@ -527,7 +493,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		654F39C2183F899C00A41EF5 /* Build configuration list for PBXNativeTarget "No connection DictionaryTests" */ = {
+		654F39C2183F899C00A41EF5 /* Build configuration list for PBXNativeTarget "Off SearchTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				654F39C3183F899C00A41EF5 /* Debug */,
