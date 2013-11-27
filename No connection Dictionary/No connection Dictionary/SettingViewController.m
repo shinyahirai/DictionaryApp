@@ -45,6 +45,9 @@
     navTitle.rightBarButtonItem = btn1;
     [navBar pushNavigationItem:navTitle animated:YES];
     
+    // ステータスバーの文字色
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     [self.view addSubview:navBar];
 }
 
@@ -102,13 +105,18 @@
 #pragma mark tableview
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    if (section == 0) {
+//        return nil;
+//    } else if (section == 1) {
+//        return @"入力履歴";
+//    } else {
+//        return @"ノーネット辞書について";
+//    }
     if (section == 0) {
-        return nil;
-    } else if (section == 1) {
         return @"入力履歴";
     } else {
         return @"ノーネット辞書について";
@@ -118,7 +126,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // 条件分岐処理が簡単な命令で行えるため、switchを使用
     switch (section) {
-        case 2:
+        case 1:
             return 2;
             break;
         default:
@@ -136,12 +144,31 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     // 条件分岐処理が難しい命令を挟むため、else if 等を使用
+//    if (indexPath.section == 0) {
+//        cell.textLabel.text = @"広告の削除";
+//    } else if (indexPath.section == 2 && indexPath.row == 0){
+//        cell.textLabel.text = @"バージョン";
+//        
+//        // バージョン表示用ラベル
+//        UILabel* rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(260,12, 100, 20)];
+//        // アプリバージョン情報
+//        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+//        rightLabel.text = version;
+//        rightLabel.textColor = [UIColor grayColor];
+//        [cell addSubview:rightLabel];
+//
+//    } else if (indexPath.section == 2 && indexPath.row == 1) {
+//        cell.textLabel.text = @"友達にこのアプリを共有";
+//    } else {
+//        cell.textLabel.text = @"履歴の一括削除";
+//    }
+
     if (indexPath.section == 0) {
-        cell.textLabel.text = @"広告の削除";
-    } else if (indexPath.section == 2 && indexPath.row == 0){
+        cell.textLabel.text = @"履歴の一括削除";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else if (indexPath.section == 1 && indexPath.row == 0){
         cell.textLabel.text = @"バージョン";
         
         // バージョン表示用ラベル
@@ -151,30 +178,40 @@
         rightLabel.text = version;
         rightLabel.textColor = [UIColor grayColor];
         [cell addSubview:rightLabel];
-
-    } else if (indexPath.section == 2 && indexPath.row == 1) {
-        cell.textLabel.text = @"友達にこのアプリを共有";
+        
     } else {
-        cell.textLabel.text = @"履歴の一括削除";
+        cell.textLabel.text = @"友達にこのアプリを共有";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
+    cell.textLabel.textColor = [UIColor colorWithRed:1.00 green:0.39 blue:0.28 alpha:1.00];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.section == 0) {
+//        // 広告削除(有料)機能実装予定
+//    } else if (indexPath.section == 2 && indexPath.row == 0) {
+//        // バージョン確認機能
+//        
+//    } else if (indexPath.section == 2 && indexPath.row == 1) {
+//        // Social共有機能
+//        [self postSocial];
+//    } else {
+//        // 履歴削除機能
+//        [self deleteHistory];
+//    }
+
     if (indexPath.section == 0) {
-        // 広告削除(有料)機能実装予定
-    } else if (indexPath.section == 2 && indexPath.row == 0) {
-        // バージョン確認機能
-        
-    } else if (indexPath.section == 2 && indexPath.row == 1) {
-        // Social共有機能
-        [self postSocial];
-    } else {
         // 履歴削除機能
         [self deleteHistory];
-    }
-}
+    } else if (indexPath.section == 1 && indexPath.row == 0) {
+        // バージョン確認機能
+        
+    } else {
+        // Social共有機能
+        [self postSocial];
+    }}
 
 #pragma mark -
 

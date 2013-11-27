@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		650F6EBD1845B0FB007D90FC /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 650F6EBA1845B0FB007D90FC /* icon@2x.png */; };
+		650F6EBE1845B0FB007D90FC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 650F6EBB1845B0FB007D90FC /* Default-568h@2x.png */; };
+		650F6EBF1845B0FB007D90FC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 650F6EBC1845B0FB007D90FC /* Default@2x.png */; };
 		65267CB31841602D00FBA5C4 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65267CB21841602D00FBA5C4 /* SettingViewController.m */; };
 		654ADB4A1840040500241DDB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 654ADB481840040500241DDB /* Model.xcdatamodeld */; };
 		654ADB4D184004BB00241DDB /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 654ADB4C184004BB00241DDB /* History.m */; };
@@ -25,12 +28,9 @@
 		654F39B2183F899C00A41EF5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654F3994183F899C00A41EF5 /* UIKit.framework */; };
 		654F39BA183F899C00A41EF5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 654F39B8183F899C00A41EF5 /* InfoPlist.strings */; };
 		654F39BC183F899C00A41EF5 /* No_connection_DictionaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F39BB183F899C00A41EF5 /* No_connection_DictionaryTests.m */; };
+		6594DC2818462C5D00957C40 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6594DC2718462C5D00957C40 /* iAd.framework */; };
 		65A225871842304500ED2A36 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A225861842304500ED2A36 /* Social.framework */; };
 		65B5A1871841446C00EB3707 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B5A1861841446C00EB3707 /* QuartzCore.framework */; };
-		65F775F21843B991006BD964 /* icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F775F11843B991006BD964 /* icon-60@2x.png */; };
-		65F775F61843BC42006BD964 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F775F51843BC42006BD964 /* icon@2x.png */; };
-		65F775F91843BE00006BD964 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F775F81843BE00006BD964 /* Default-568h@2x.png */; };
-		65F775FB1843BF3E006BD964 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F775FA1843BF3E006BD964 /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		650F6EBA1845B0FB007D90FC /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "images/icon@2x.png"; sourceTree = "<group>"; };
+		650F6EBB1845B0FB007D90FC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "images/Default-568h@2x.png"; sourceTree = "<group>"; };
+		650F6EBC1845B0FB007D90FC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "images/Default@2x.png"; sourceTree = "<group>"; };
 		65267CB11841602D00FBA5C4 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		65267CB21841602D00FBA5C4 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		654ADB491840040500241DDB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -69,12 +72,9 @@
 		654F39B7183F899C00A41EF5 /* No connection DictionaryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "No connection DictionaryTests-Info.plist"; sourceTree = "<group>"; };
 		654F39B9183F899C00A41EF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		654F39BB183F899C00A41EF5 /* No_connection_DictionaryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = No_connection_DictionaryTests.m; sourceTree = "<group>"; };
+		6594DC2718462C5D00957C40 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		65A225861842304500ED2A36 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		65B5A1861841446C00EB3707 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		65F775F11843B991006BD964 /* icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-60@2x.png"; path = "images/icon-60@2x.png"; sourceTree = "<group>"; };
-		65F775F51843BC42006BD964 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "images/icon@2x.png"; sourceTree = "<group>"; };
-		65F775F81843BE00006BD964 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "images/Default-568h@2x.png"; sourceTree = "<group>"; };
-		65F775FA1843BF3E006BD964 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "images/Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6594DC2818462C5D00957C40 /* iAd.framework in Frameworks */,
 				65A225871842304500ED2A36 /* Social.framework in Frameworks */,
 				65B5A1871841446C00EB3707 /* QuartzCore.framework in Frameworks */,
 				654ADB4F184004D100241DDB /* CoreData.framework in Frameworks */,
@@ -126,6 +127,7 @@
 		654F398F183F899C00A41EF5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6594DC2718462C5D00957C40 /* iAd.framework */,
 				65A225861842304500ED2A36 /* Social.framework */,
 				65B5A1861841446C00EB3707 /* QuartzCore.framework */,
 				654ADB4E184004D100241DDB /* CoreData.framework */,
@@ -197,10 +199,9 @@
 		65F775F01843B980006BD964 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				65F775FA1843BF3E006BD964 /* Default@2x.png */,
-				65F775F81843BE00006BD964 /* Default-568h@2x.png */,
-				65F775F51843BC42006BD964 /* icon@2x.png */,
-				65F775F11843B991006BD964 /* icon-60@2x.png */,
+				650F6EBA1845B0FB007D90FC /* icon@2x.png */,
+				650F6EBB1845B0FB007D90FC /* Default-568h@2x.png */,
+				650F6EBC1845B0FB007D90FC /* Default@2x.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -281,13 +282,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650F6EBF1845B0FB007D90FC /* Default@2x.png in Resources */,
 				654F39A9183F899C00A41EF5 /* Images.xcassets in Resources */,
+				650F6EBD1845B0FB007D90FC /* icon@2x.png in Resources */,
 				654F399B183F899C00A41EF5 /* InfoPlist.strings in Resources */,
+				650F6EBE1845B0FB007D90FC /* Default-568h@2x.png in Resources */,
 				654F39A4183F899C00A41EF5 /* Main.storyboard in Resources */,
-				65F775F21843B991006BD964 /* icon-60@2x.png in Resources */,
-				65F775F61843BC42006BD964 /* icon@2x.png in Resources */,
-				65F775FB1843BF3E006BD964 /* Default@2x.png in Resources */,
-				65F775F91843BE00006BD964 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +442,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "No connection Dictionary/No connection Dictionary-Prefix.pch";
 				INFOPLIST_FILE = "No connection Dictionary/No connection Dictionary-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -455,7 +457,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "No connection Dictionary/No connection Dictionary-Prefix.pch";
 				INFOPLIST_FILE = "No connection Dictionary/No connection Dictionary-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
