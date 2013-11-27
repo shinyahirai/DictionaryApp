@@ -45,17 +45,17 @@
     navTitle.rightBarButtonItem = btn1;
     [navBar pushNavigationItem:navTitle animated:YES];
     
-    // ステータスバーの文字色
-    // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
     [self.view addSubview:navBar];
     
+    // ステータスバーの文字色をViewごとに切り替える
     if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
         //viewControllerで制御することを伝える。iOS7 からできたメソッド
         [self setNeedsStatusBarAppearanceUpdate];
     }
 }
 
+#pragma mark -
+#pragma mark status bar
 - (BOOL)prefersStatusBarHidden {
     //YESでステータスバーを非表示（NOなら表示）
     return NO;
